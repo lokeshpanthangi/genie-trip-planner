@@ -1,12 +1,18 @@
 import { Button } from "@/components/ui/button";
 import { MapPin, Plane, Sparkles } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const Hero = () => {
   const navigate = useNavigate();
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden gradient-hero">
+      {/* Theme Toggle in Top Right */}
+      <div className="absolute top-6 right-6 z-20">
+        <ThemeToggle />
+      </div>
+
       {/* Decorative Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Abstract map lines */}
@@ -87,7 +93,7 @@ const Hero = () => {
           <Button 
             variant="hero" 
             size="xl"
-            onClick={() => navigate("/planner")}
+            onClick={() => navigate("/auth")}
             className="animate-pulse-glow"
           >
             Start Planning

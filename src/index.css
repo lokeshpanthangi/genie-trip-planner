@@ -224,3 +224,34 @@
 .stagger-children > *:nth-child(3) { animation-delay: 0.3s; }
 .stagger-children > *:nth-child(4) { animation-delay: 0.4s; }
 .stagger-children > *:nth-child(5) { animation-delay: 0.5s; }
+
+/* Leaflet Styles */
+.leaflet-container {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  z-index: 0;
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 12px;
+  box-shadow: 0 4px 12px hsl(215 25% 15% / 0.15);
+}
+
+.leaflet-popup-content {
+  margin: 12px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.dark .leaflet-popup-content-wrapper {
+  background-color: hsl(215 25% 12%);
+  color: hsl(210 20% 95%);
+}
+
+.dark .leaflet-popup-tip {
+  background-color: hsl(215 25% 12%);
+}
+
+.custom-marker {
+  background: transparent;
+  border: none;
+}
+
