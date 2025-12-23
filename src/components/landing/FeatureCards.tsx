@@ -1,72 +1,78 @@
-import { MessageSquare, Users, RefreshCw, Sparkles } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+import { MessageSquare, Users, Zap, Sparkles, ArrowUpRight } from "lucide-react";
 
 const features = [
   {
     icon: MessageSquare,
-    title: "Lazy Chat",
-    description: "Just tell us where and how much. We handle the rest.",
-    color: "teal",
+    title: "Chat to Plan",
+    description: "Just describe your dream trip. Our AI handles the rest.",
+    gradient: "from-primary/20 to-teal-light",
+    iconColor: "text-primary",
   },
   {
     icon: Users,
-    title: "Group Compromise",
-    description: "We solve budget conflicts and find the sweet spot for everyone.",
-    color: "sky",
+    title: "Group Harmony",
+    description: "Balances everyone's budget and preferences automatically.",
+    gradient: "from-secondary/20 to-purple-light",
+    iconColor: "text-secondary",
   },
   {
-    icon: RefreshCw,
-    title: "Live Rebalancing",
-    description: "Auto-adjusts for price spikes and keeps you on budget.",
-    color: "teal",
+    icon: Zap,
+    title: "Instant Itineraries",
+    description: "Get a complete day-by-day plan in seconds, not hours.",
+    gradient: "from-accent/20 to-orange-light",
+    iconColor: "text-accent",
   },
   {
     icon: Sparkles,
-    title: "Personality AI",
-    description: "Plans tailored for Foodies, Adventurers, Culture Buffs & more.",
-    color: "sky",
+    title: "Smart Suggestions",
+    description: "Personalized picks for foodies, adventurers, and more.",
+    gradient: "from-sky/20 to-sky-light",
+    iconColor: "text-sky",
   },
 ];
 
 const FeatureCards = () => {
   return (
-    <section className="py-24 px-6 bg-muted/30">
-      <div className="container mx-auto max-w-6xl">
-        <div className="text-center mb-16 animate-slide-up">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Why Groups Love Us
+    <section className="py-32 px-6 gradient-mesh noise-overlay">
+      <div className="container mx-auto max-w-6xl relative z-10">
+        <div className="text-center mb-20 animate-slide-up">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-secondary/10 text-secondary text-sm font-medium mb-4">
+            Features
+          </span>
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+            Why groups{" "}
+            <span className="text-gradient">love</span>
+            {" "}us
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Planning a trip with friends shouldn't feel like herding cats. We've got the tools to make it smooth.
+          <p className="text-lg text-muted-foreground max-w-xl mx-auto">
+            Stop the endless group chats. Let AI find the perfect trip for everyone.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 stagger-children">
-          {features.map((feature, index) => (
-            <Card 
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 stagger-children">
+          {features.map((feature) => (
+            <div 
               key={feature.title}
-              className="group bg-card border-0 shadow-soft hover:shadow-medium transition-all duration-300 hover:-translate-y-1 rounded-2xl overflow-hidden"
+              className="group relative p-8 rounded-3xl glass-strong shadow-md hover:shadow-lg transition-all duration-500 hover:-translate-y-1 overflow-hidden"
             >
-              <CardContent className="p-6">
-                <div 
-                  className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-5 transition-transform duration-300 group-hover:scale-110 ${
-                    feature.color === "teal" ? "bg-teal-light" : "bg-sky-light"
-                  }`}
-                >
-                  <feature.icon 
-                    className={`w-7 h-7 ${
-                      feature.color === "teal" ? "text-teal" : "text-sky"
-                    }`} 
-                  />
+              {/* Background gradient */}
+              <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+              
+              <div className="relative z-10">
+                <div className="flex items-start justify-between mb-6">
+                  <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${feature.gradient} flex items-center justify-center`}>
+                    <feature.icon className={`w-7 h-7 ${feature.iconColor}`} />
+                  </div>
+                  <ArrowUpRight className="w-5 h-5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
                 </div>
-                <h3 className="text-xl font-semibold text-foreground mb-2">
+                <h3 className="text-2xl font-semibold text-foreground mb-3">
                   {feature.title}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-muted-foreground text-lg leading-relaxed">
                   {feature.description}
                 </p>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           ))}
         </div>
       </div>
