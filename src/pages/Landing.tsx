@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { ScrollReveal } from "@/hooks/use-scroll-animation";
 import { Helmet } from "react-helmet";
 import {
   Plane,
@@ -265,31 +266,30 @@ const Landing = () => {
         {/* Features Section */}
         <section id="features" className="py-24 relative">
           <div className="container mx-auto px-6">
-            <div className="text-center max-w-2xl mx-auto mb-16">
+            <ScrollReveal className="text-center max-w-2xl mx-auto mb-16">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
                 Everything you need
               </h2>
               <p className="text-muted-foreground text-lg">
                 Powerful features that make group travel planning actually enjoyable.
               </p>
-            </div>
+            </ScrollReveal>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-6xl mx-auto">
               {features.map((feature, index) => (
-                <Card 
-                  key={index} 
-                  className="group border-border/50 bg-card/50 backdrop-blur-sm hover:bg-card hover:shadow-lg transition-all duration-300"
-                >
-                  <CardContent className="p-6">
-                    <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${feature.gradient} flex items-center justify-center mb-4 shadow-md`}>
-                      <feature.icon className="w-5 h-5 text-primary-foreground" />
-                    </div>
-                    <h3 className="text-lg font-semibold text-foreground mb-2">
-                      {feature.title}
-                    </h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed">{feature.description}</p>
-                  </CardContent>
-                </Card>
+                <ScrollReveal key={index} delay={index * 0.1}>
+                  <Card className="group h-full border-border/50 bg-card/50 backdrop-blur-sm hover:bg-card hover:shadow-lg transition-all duration-300">
+                    <CardContent className="p-6">
+                      <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${feature.gradient} flex items-center justify-center mb-4 shadow-md`}>
+                        <feature.icon className="w-5 h-5 text-primary-foreground" />
+                      </div>
+                      <h3 className="text-lg font-semibold text-foreground mb-2">
+                        {feature.title}
+                      </h3>
+                      <p className="text-muted-foreground text-sm leading-relaxed">{feature.description}</p>
+                    </CardContent>
+                  </Card>
+                </ScrollReveal>
               ))}
             </div>
           </div>
@@ -298,31 +298,33 @@ const Landing = () => {
         {/* How It Works Section */}
         <section id="how-it-works" className="py-24 gradient-mesh">
           <div className="container mx-auto px-6">
-            <div className="text-center max-w-2xl mx-auto mb-16">
+            <ScrollReveal className="text-center max-w-2xl mx-auto mb-16">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
                 How it works
               </h2>
               <p className="text-muted-foreground text-lg">
                 From idea to adventure in four simple steps.
               </p>
-            </div>
+            </ScrollReveal>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
               {steps.map((step, index) => (
-                <div key={index} className="text-center group">
-                  <div className="relative mb-6">
-                    <div className="w-16 h-16 rounded-2xl glass-strong flex items-center justify-center mx-auto shadow-lg group-hover:shadow-xl transition-shadow">
-                      <step.icon className="w-7 h-7 text-primary" />
+                <ScrollReveal key={index} delay={index * 0.15}>
+                  <div className="text-center group">
+                    <div className="relative mb-6">
+                      <div className="w-16 h-16 rounded-2xl glass-strong flex items-center justify-center mx-auto shadow-lg group-hover:shadow-xl transition-shadow">
+                        <step.icon className="w-7 h-7 text-primary" />
+                      </div>
+                      <span className="absolute -top-2 -right-2 w-7 h-7 rounded-full gradient-primary text-xs font-bold text-primary-foreground flex items-center justify-center shadow-md">
+                        {step.num.slice(-1)}
+                      </span>
                     </div>
-                    <span className="absolute -top-2 -right-2 w-7 h-7 rounded-full gradient-primary text-xs font-bold text-primary-foreground flex items-center justify-center shadow-md">
-                      {step.num.slice(-1)}
-                    </span>
+                    <h3 className="text-lg font-semibold text-foreground mb-2">
+                      {step.title}
+                    </h3>
+                    <p className="text-muted-foreground text-sm">{step.description}</p>
                   </div>
-                  <h3 className="text-lg font-semibold text-foreground mb-2">
-                    {step.title}
-                  </h3>
-                  <p className="text-muted-foreground text-sm">{step.description}</p>
-                </div>
+                </ScrollReveal>
               ))}
             </div>
           </div>
@@ -331,38 +333,40 @@ const Landing = () => {
         {/* Testimonials Section */}
         <section id="testimonials" className="py-24">
           <div className="container mx-auto px-6">
-            <div className="text-center max-w-2xl mx-auto mb-16">
+            <ScrollReveal className="text-center max-w-2xl mx-auto mb-16">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
                 Loved by travelers
               </h2>
               <p className="text-muted-foreground text-lg">
                 Join thousands who've discovered stress-free group planning.
               </p>
-            </div>
+            </ScrollReveal>
 
             <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
               {testimonials.map((testimonial, index) => (
-                <Card key={index} className="border-border/50 bg-card/50 backdrop-blur-sm">
-                  <CardContent className="p-6">
-                    <div className="flex gap-0.5 mb-4">
-                      {Array.from({ length: 5 }).map((_, i) => (
-                        <Star key={i} className="w-4 h-4 fill-accent text-accent" />
-                      ))}
-                    </div>
-                    <p className="text-foreground mb-6 text-sm leading-relaxed">"{testimonial.content}"</p>
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full gradient-primary flex items-center justify-center">
-                        <span className="text-xs font-semibold text-primary-foreground">
-                          {testimonial.avatar}
-                        </span>
+                <ScrollReveal key={index} delay={index * 0.1}>
+                  <Card className="h-full border-border/50 bg-card/50 backdrop-blur-sm">
+                    <CardContent className="p-6">
+                      <div className="flex gap-0.5 mb-4">
+                        {Array.from({ length: 5 }).map((_, i) => (
+                          <Star key={i} className="w-4 h-4 fill-accent text-accent" />
+                        ))}
                       </div>
-                      <div>
-                        <div className="font-medium text-foreground text-sm">{testimonial.name}</div>
-                        <div className="text-xs text-muted-foreground">{testimonial.role}</div>
+                      <p className="text-foreground mb-6 text-sm leading-relaxed">"{testimonial.content}"</p>
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full gradient-primary flex items-center justify-center">
+                          <span className="text-xs font-semibold text-primary-foreground">
+                            {testimonial.avatar}
+                          </span>
+                        </div>
+                        <div>
+                          <div className="font-medium text-foreground text-sm">{testimonial.name}</div>
+                          <div className="text-xs text-muted-foreground">{testimonial.role}</div>
+                        </div>
                       </div>
-                    </div>
-                  </CardContent>
-                </Card>
+                    </CardContent>
+                  </Card>
+                </ScrollReveal>
               ))}
             </div>
           </div>
@@ -371,7 +375,7 @@ const Landing = () => {
         {/* CTA Section */}
         <section className="py-24">
           <div className="container mx-auto px-6">
-            <div className="max-w-3xl mx-auto">
+            <ScrollReveal className="max-w-3xl mx-auto">
               <Card className="border-0 overflow-hidden shadow-2xl">
                 <div className="gradient-primary p-px rounded-xl">
                   <div className="bg-card rounded-xl p-10 md:p-14 text-center">
@@ -398,7 +402,7 @@ const Landing = () => {
                   </div>
                 </div>
               </Card>
-            </div>
+            </ScrollReveal>
           </div>
         </section>
 
