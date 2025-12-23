@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { MapPin, Plane, Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles, Globe, Compass, Map } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
@@ -7,98 +7,97 @@ const Hero = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden gradient-hero">
-      {/* Theme Toggle in Top Right */}
-      <div className="absolute top-6 right-6 z-20">
-        <ThemeToggle />
-      </div>
-
-      {/* Decorative Elements */}
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden gradient-hero noise-overlay">
+      {/* Floating Orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Abstract map lines */}
-        <svg className="absolute top-20 left-10 w-64 h-64 opacity-10" viewBox="0 0 200 200">
-          <path
-            d="M10,50 Q50,10 100,50 T190,50"
-            fill="none"
-            stroke="hsl(174 60% 40%)"
-            strokeWidth="2"
-            strokeDasharray="8,4"
-          />
-          <path
-            d="M10,100 Q80,60 150,100 T190,100"
-            fill="none"
-            stroke="hsl(200 80% 55%)"
-            strokeWidth="2"
-            strokeDasharray="8,4"
-          />
-          <path
-            d="M10,150 Q60,120 120,150 T190,150"
-            fill="none"
-            stroke="hsl(174 60% 40%)"
-            strokeWidth="2"
-            strokeDasharray="8,4"
-          />
-        </svg>
-
-        <svg className="absolute bottom-20 right-10 w-80 h-80 opacity-10" viewBox="0 0 200 200">
-          <circle cx="50" cy="50" r="3" fill="hsl(174 60% 40%)" />
-          <circle cx="150" cy="80" r="3" fill="hsl(200 80% 55%)" />
-          <circle cx="100" cy="150" r="3" fill="hsl(174 60% 40%)" />
-          <path
-            d="M50,50 L150,80 L100,150 Z"
-            fill="none"
-            stroke="hsl(174 60% 40%)"
-            strokeWidth="1"
-            strokeDasharray="4,4"
-          />
-        </svg>
-
+        {/* Large gradient orb */}
+        <div 
+          className="absolute top-1/4 -left-20 w-96 h-96 rounded-full opacity-40 blur-3xl animate-float"
+          style={{ background: 'linear-gradient(135deg, hsl(165 80% 70%), hsl(200 80% 70%))' }}
+        />
+        <div 
+          className="absolute bottom-1/4 -right-20 w-80 h-80 rounded-full opacity-30 blur-3xl animate-float-delayed"
+          style={{ background: 'linear-gradient(135deg, hsl(260 70% 75%), hsl(35 90% 75%))' }}
+        />
+        
         {/* Floating icons */}
-        <div className="absolute top-1/4 right-1/4 animate-float" style={{ animationDelay: "0s" }}>
-          <div className="w-12 h-12 rounded-2xl bg-teal-light flex items-center justify-center">
-            <Plane className="w-6 h-6 text-teal" />
+        <div className="absolute top-[20%] right-[15%] animate-float" style={{ animationDelay: "0s" }}>
+          <div className="w-16 h-16 rounded-2xl glass-strong shadow-lg flex items-center justify-center">
+            <Globe className="w-8 h-8 text-primary" />
           </div>
         </div>
-        <div className="absolute bottom-1/3 left-1/5 animate-float" style={{ animationDelay: "2s" }}>
-          <div className="w-10 h-10 rounded-xl bg-sky-light flex items-center justify-center">
-            <MapPin className="w-5 h-5 text-sky" />
+        <div className="absolute bottom-[30%] left-[10%] animate-float-delayed" style={{ animationDelay: "1s" }}>
+          <div className="w-14 h-14 rounded-xl glass-strong shadow-lg flex items-center justify-center">
+            <Compass className="w-7 h-7 text-secondary" />
           </div>
         </div>
-        <div className="absolute top-1/3 left-1/4 animate-float" style={{ animationDelay: "4s" }}>
-          <div className="w-8 h-8 rounded-lg bg-teal-light flex items-center justify-center">
-            <Sparkles className="w-4 h-4 text-teal" />
+        <div className="absolute top-[40%] left-[20%] animate-float" style={{ animationDelay: "2s" }}>
+          <div className="w-12 h-12 rounded-lg glass-strong shadow-lg flex items-center justify-center">
+            <Map className="w-6 h-6 text-accent" />
           </div>
         </div>
       </div>
 
       {/* Main Content */}
       <div className="relative z-10 container mx-auto px-6 text-center">
-        <div className="max-w-4xl mx-auto animate-slide-up">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal-light text-teal text-sm font-medium mb-8">
-            <Sparkles className="w-4 h-4" />
-            AI-Powered Travel Planning
+        <div className="max-w-4xl mx-auto">
+          {/* Badge */}
+          <div 
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full glass-strong shadow-md mb-8 animate-scale-in"
+            style={{ animationDelay: '0.1s' }}
+          >
+            <Sparkles className="w-4 h-4 text-primary" />
+            <span className="text-sm font-medium text-foreground">AI-Powered Trip Planning</span>
           </div>
           
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight mb-6">
-            The Travel Agent That{" "}
-            <span className="text-gradient">Negotiates</span>{" "}
-            With Your Friends
+          {/* Headline */}
+          <h1 
+            className="text-5xl md:text-6xl lg:text-7xl font-bold text-foreground leading-[1.1] mb-6 animate-slide-up"
+            style={{ animationDelay: '0.2s' }}
+          >
+            Plan trips that{" "}
+            <span className="text-gradient">everyone</span>{" "}
+            actually agrees on
           </h1>
           
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
-            Plan group trips effortlessly. Our AI handles the chaos of different budgets, 
-            preferences, and schedules — so you can focus on making memories.
+          {/* Subheadline */}
+          <p 
+            className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed animate-slide-up"
+            style={{ animationDelay: '0.35s' }}
+          >
+            Our AI handles the chaos of budgets, preferences, and schedules. You focus on making memories.
           </p>
           
-          <Button 
-            variant="hero" 
-            size="xl"
-            onClick={() => navigate("/auth")}
-            className="animate-pulse-glow"
+          {/* CTA Buttons */}
+          <div 
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-slide-up"
+            style={{ animationDelay: '0.5s' }}
           >
-            Start Planning
-            <Plane className="w-5 h-5 ml-2" />
-          </Button>
+            <Button 
+              variant="hero" 
+              size="xl"
+              onClick={() => navigate("/planner")}
+              className="animate-pulse-glow group"
+            >
+              Start Planning
+              <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
+            </Button>
+            <Button 
+              variant="outline" 
+              size="xl"
+              className="border-2"
+            >
+              See How It Works
+            </Button>
+          </div>
+
+          {/* Trust indicator */}
+          <p 
+            className="mt-12 text-sm text-muted-foreground animate-fade-in"
+            style={{ animationDelay: '0.7s' }}
+          >
+            Trusted by travelers planning trips to 50+ destinations
+          </p>
         </div>
       </div>
     </section>
