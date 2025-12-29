@@ -81,7 +81,7 @@ const InitialPlanner = () => {
         <meta name="description" content="Chat with our AI to plan the perfect group trip." />
       </Helmet>
 
-      <div className="h-screen gradient-hero flex overflow-hidden">
+      <div className="min-h-screen gradient-hero flex">
         {/* Theme Toggle */}
         <div className="absolute top-6 right-6 z-20">
           <ThemeToggle />
