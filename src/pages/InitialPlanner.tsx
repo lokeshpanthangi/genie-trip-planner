@@ -117,11 +117,11 @@ const InitialPlanner = () => {
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 flex flex-col lg:flex-row gap-8 p-4 lg:p-8">
+        <main className="flex-1 flex flex-col lg:flex-row gap-8 p-4 lg:p-8 lg:ml-0 ml-0 overflow-y-auto">
           {/* Chat Panel */}
-          <div className="flex-1 flex flex-col max-w-4xl mx-auto w-full">
-            <div className="bg-card rounded-3xl shadow-medium p-6 flex flex-col h-full">
-              <div className="flex-1 overflow-y-auto space-y-4 mb-4 pr-2">
+          <div className="flex-1 flex flex-col max-w-4xl mx-auto w-full min-h-0">
+            <div className="bg-card rounded-3xl shadow-medium p-6 flex flex-col min-h-[400px] lg:h-full">
+              <div className="flex-1 overflow-y-auto space-y-4 mb-4 pr-2 max-h-[50vh] lg:max-h-none">
                 {messages.map((msg, i) => (
                   <ChatMessage key={i} content={msg.content} isBot={msg.isBot} />
                 ))}
