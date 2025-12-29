@@ -139,11 +139,11 @@ const InitialPlanner = () => {
         <main className="flex-1 flex flex-col lg:flex-row gap-8 p-4 lg:p-8 lg:ml-0 ml-0 overflow-y-auto">
           {/* Chat Panel */}
           <div className="flex-1 flex flex-col max-w-4xl mx-auto w-full">
-            <div className="bg-card rounded-3xl shadow-medium p-6 flex flex-col">
+            <div className="bg-card rounded-3xl shadow-medium p-6 flex flex-col min-h-[500px]">
               <div 
                 ref={chatContainerRef}
                 onWheel={handleChatScroll}
-                className="overflow-y-auto space-y-4 mb-4 pr-2 max-h-[50vh] lg:max-h-[60vh]"
+                className="overflow-y-auto space-y-4 mb-4 pr-2 h-[400px] lg:h-[500px]"
                 style={{ overscrollBehavior: 'contain' }}
               >
                 {messages.map((msg, i) => (
