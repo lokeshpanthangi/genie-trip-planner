@@ -143,7 +143,7 @@ const InitialPlanner = () => {
               <div 
                 ref={chatContainerRef}
                 onWheel={handleChatScroll}
-                className="overflow-y-auto space-y-4 mb-4 pr-2 h-[400px] lg:h-[500px]"
+                className="overflow-y-auto space-y-4 mb-4 pr-2 h-[400px] lg:h-[500px] scrollbar-hide"
                 style={{ overscrollBehavior: 'contain' }}
               >
                 {messages.map((msg, i) => (
