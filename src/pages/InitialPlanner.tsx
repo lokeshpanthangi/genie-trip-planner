@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import ChatMessage from "@/components/planner/ChatMessage";
 import ChatInput from "@/components/planner/ChatInput";
@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import { Rocket, Menu, X } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { Helmet } from "react-helmet";
-
 interface Message {
   content: string;
   isBot: boolean;
@@ -26,6 +25,26 @@ const InitialPlanner = () => {
   const [step, setStep] = useState(0);
   const [isReady, setIsReady] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
+
+  // Handle scroll chaining - when chat reaches boundary, let page scroll
+  const handleChatScroll = (e: React.WheelEvent<HTMLDivElement>) => {
+    const container = chatContainerRef.current;
+    if (!container) return;
+
+    const { scrollTop, scrollHeight, clientHeight } = container;
+    const isAtTop = scrollTop === 0;
+    const isAtBottom = Math.abs(scrollHeight - clientHeight - scrollTop) < 1;
+
+    // If scrolling up and at top, or scrolling down and at bottom, let page scroll
+    if ((e.deltaY < 0 && isAtTop) || (e.deltaY > 0 && isAtBottom)) {
+      // Allow default behavior (page scroll)
+      return;
+    }
+
+    // Otherwise, scroll the chat container
+    e.stopPropagation();
+  };
 
   const botResponses = [
     "Hi! 👋 Where are you dreaming of going? And what's your total budget for the trip?",
@@ -119,9 +138,14 @@ const InitialPlanner = () => {
         {/* Main Content */}
         <main className="flex-1 flex flex-col lg:flex-row gap-8 p-4 lg:p-8 lg:ml-0 ml-0 overflow-y-auto">
           {/* Chat Panel */}
-          <div className="flex-1 flex flex-col max-w-4xl mx-auto w-full min-h-0">
-            <div className="bg-card rounded-3xl shadow-medium p-6 flex flex-col min-h-[400px] lg:h-full">
-              <div className="flex-1 overflow-y-auto space-y-4 mb-4 pr-2 max-h-[50vh] lg:max-h-none">
+          <div className="flex-1 flex flex-col max-w-4xl mx-auto w-full">
+            <div className="bg-card rounded-3xl shadow-medium p-6 flex flex-col">
+              <div 
+                ref={chatContainerRef}
+                onWheel={handleChatScroll}
+                className="overflow-y-auto space-y-4 mb-4 pr-2 max-h-[50vh] lg:max-h-[60vh]"
+                style={{ overscrollBehavior: 'contain' }}
+              >
                 {messages.map((msg, i) => (
                   <ChatMessage key={i} content={msg.content} isBot={msg.isBot} />
                 ))}
