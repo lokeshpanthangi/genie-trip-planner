@@ -316,48 +316,6 @@ const Landing = () => {
               </div>
             </div>
 
-            {/* Floating Elements */}
-            <div className="hidden lg:block absolute top-1/3 left-10 animate-float">
-              <div className="p-4 rounded-2xl bg-background/80 backdrop-blur-xl border border-border/50 shadow-xl">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center">
-                    <MapPin className="w-5 h-5 text-white" />
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium">Destination Found</p>
-                    <p className="text-xs text-muted-foreground">Bali, Indonesia</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="hidden lg:block absolute top-1/2 right-10 animate-float" style={{ animationDelay: "1s" }}>
-              <div className="p-4 rounded-2xl bg-background/80 backdrop-blur-xl border border-border/50 shadow-xl">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-violet-500 to-purple-500 flex items-center justify-center">
-                    <Calendar className="w-5 h-5 text-white" />
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium">7 Days Planned</p>
-                    <p className="text-xs text-muted-foreground">Aug 15 - 22, 2025</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="hidden lg:block absolute bottom-1/4 left-20 animate-float" style={{ animationDelay: "2s" }}>
-              <div className="p-4 rounded-2xl bg-background/80 backdrop-blur-xl border border-border/50 shadow-xl">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center">
-                    <Wallet className="w-5 h-5 text-white" />
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium">Budget Optimized</p>
-                    <p className="text-xs text-muted-foreground">$2,400 / person</p>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
 
           {/* Scroll Indicator */}
