@@ -2,8 +2,8 @@ from typing import TypedDict, List, Optional, Annotated
 from langgraph.graph.message import add_messages
 from langchain_core.messages import BaseMessage
 
-class TripPlannerState(TypedDict):
 
+class TripPlannerState(TypedDict):
     messages: Annotated[List[BaseMessage], add_messages]
     no_of_people: Optional[int]
     budget: Optional[int]
@@ -14,4 +14,6 @@ class TripPlannerState(TypedDict):
     end_date: Optional[str]
     kids: bool
     women_pregnant: bool
-    extra_info : Optional[List[str]]
+    extra_info: Optional[List[str]]
+    completed_plan: bool
+    summary: Optional[str]
