@@ -32,7 +32,7 @@ interface TripSummary {
 }
 
 interface APIResponse {
-  response: string;
+  messages: Array<{ content: string; type: string }>;
   no_of_people: number | null;
   budget: number | null;
   source: string | null;
@@ -46,6 +46,20 @@ interface APIResponse {
   completed_plan: boolean;
   summary: string | null;
 }
+
+// Helper function to extract AI response from state
+const extractAIResponse = (data: APIResponse): string => {
+  // Get the last AI message from the messages array
+  if (data.messages && Array.isArray(data.messages)) {
+    for (let i = data.messages.length - 1; i >= 0; i--) {
+      const msg = data.messages[i];
+      if (msg.type === "ai" || msg.type === "AIMessage") {
+        return msg.content;
+      }
+    }
+  }
+  return "";
+};
 
 // Generate a unique session ID
 const generateSessionId = () => {
@@ -105,8 +119,14 @@ const InitialPlanner = () => {
         }
 
         const data: APIResponse = await response.json();
-        setMessages([{ content: data.response, isBot: true }]);
-        updateSummaryFromResponse(data);
+        const aiResponse = extractAIResponse(data);
+        
+        if (aiResponse) {
+          setMessages([{ content: aiResponse, isBot: true }]);
+          updateSummaryFromResponse(data);
+        } else {
+          throw new Error("Empty response");
+        }
       } catch (err) {
         setError("Unable to connect to AI service. Please make sure the backend is running.");
         // Fallback greeting
@@ -171,12 +191,17 @@ const InitialPlanner = () => {
       }
 
       const data: APIResponse = await response.json();
+      const aiResponse = extractAIResponse(data);
       
-      // Add bot response
-      setMessages(prev => [...prev, { content: data.response, isBot: true }]);
-      
-      // Update summary with extracted information
-      updateSummaryFromResponse(data);
+      if (aiResponse) {
+        // Add bot response
+        setMessages(prev => [...prev, { content: aiResponse, isBot: true }]);
+        
+        // Update summary with extracted information
+        updateSummaryFromResponse(data);
+      } else {
+        throw new Error("Empty response from AI");
+      }
 
     } catch (err) {
       setError("Failed to send message. Please try again.");
@@ -225,7 +250,13 @@ const InitialPlanner = () => {
     })
       .then(res => res.json())
       .then((data: APIResponse) => {
-        setMessages([{ content: data.response, isBot: true }]);
+        const aiResponse = extractAIResponse(data);
+        if (aiResponse) {
+          setMessages([{ content: aiResponse, isBot: true }]);
+          updateSummaryFromResponse(data);
+        } else {
+          throw new Error("Empty response");
+        }
       })
       .catch(() => {
         setMessages([{ 

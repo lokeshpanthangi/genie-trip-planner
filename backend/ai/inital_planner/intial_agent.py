@@ -8,6 +8,8 @@ from langgraph.checkpoint.memory import MemorySaver
 from config import model
 from ai.state import TripPlannerState
 
+
+
 init_router = APIRouter()
 
 class UserRequest(BaseModel):
@@ -42,7 +44,6 @@ Your goal is to gather specific details to build a perfect itinerary.
    - Also ask the user if there are kids or pregnant women traveling. and some extra preferences (diet, activities).
 """
 
-
 prompt = ChatPromptTemplate.from_messages([
     ("system", system_instructions),
     MessagesPlaceholder(variable_name="messages"),
@@ -54,14 +55,14 @@ agent_chain = prompt | structured_llm
 
 def call_agent_model(state: TripPlannerState):
     response = agent_chain.invoke({"messages": state["messages"]})
-    
+
     update_dict = {
-        k: v for k, v in response.dict().items() 
+        k: v for k, v in response.dict().items()
         if v is not None and k != "response"
     }
-    
+
     ai_msg = AIMessage(content=response.response)
-    
+
     return {
         "messages": [ai_msg],
         **update_dict
@@ -71,28 +72,19 @@ workflow = StateGraph(TripPlannerState)
 workflow.add_node("agent", call_agent_model)
 workflow.add_edge(START, "agent")
 workflow.add_edge("agent", END)
-
 memory = MemorySaver()
 app_graph = workflow.compile(checkpointer=memory)
+
 
 @init_router.post("/init_agent")
 def init_agent(request: UserRequest):
     config = {"configurable": {"thread_id": request.session_id}}
     input_message = HumanMessage(content=request.user_input)
-    
     try:
         final_state = app_graph.invoke(
-            {"messages": [input_message]}, 
-            config=config
-        )
-        
-        last_response = final_state["messages"][-1].content
-        
-        return {
-            "response": last_response,
-            "completed_plan": final_state.get("completed_plan"),
-            "summary": final_state.get("summary")
-        }
-        
+            {"messages": [input_message]},
+            config=config)
+        return final_state
+    
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from ai.intial_agent import init_router
+from    ai.inital_planner.intial_agent import init_router
 
 app = FastAPI()
 
