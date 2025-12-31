@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
-from typing import Optional, List
+from typing import Optional, List, Any
 from langchain_core.messages import HumanMessage, AIMessage
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langgraph.graph import StateGraph, START, END
@@ -54,10 +54,10 @@ structured_llm = model.with_structured_output(InitialAgentOutput)
 agent_chain = prompt | structured_llm
 
 def call_agent_model(state: TripPlannerState):
-    response = agent_chain.invoke({"messages": state["messages"]})
+    response: InitialAgentOutput = agent_chain.invoke({"messages": state["messages"]})  # type: ignore
 
     update_dict = {
-        k: v for k, v in response.dict().items()
+        k: v for k, v in response.model_dump().items()
         if v is not None and k != "response"
     }
 
@@ -78,11 +78,11 @@ app_graph = workflow.compile(checkpointer=memory)
 
 @init_router.post("/init_agent")
 def init_agent(request: UserRequest):
-    config = {"configurable": {"thread_id": request.session_id}}
+    config: Any = {"configurable": {"thread_id": request.session_id}}
     input_message = HumanMessage(content=request.user_input)
     try:
-        final_state = app_graph.invoke(
-            {"messages": [input_message]},
+        final_state: Any = app_graph.invoke(
+            {"messages": [input_message]},  # type: ignore
             config=config)
         return final_state
     
