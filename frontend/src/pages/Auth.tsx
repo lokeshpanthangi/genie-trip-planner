@@ -50,7 +50,7 @@ const Auth = () => {
           title: "Welcome back!",
           description: "You've successfully logged in.",
         });
-        navigate("/initial-planner");
+        navigate("/dashboard");
       } else {
         toast({
           title: "Error",
@@ -83,7 +83,7 @@ const Auth = () => {
           title: "Account created!",
           description: "Welcome to TravelAI. Let's plan your adventure!",
         });
-        navigate("/initial-planner");
+        navigate("/dashboard");
       } else {
         toast({
           title: "Error",

@@ -77,7 +77,7 @@ const DashboardMode = () => {
               <Button
                 variant="ghost"
                 size="sm"
-                onClick={() => navigate("/initial-planner")}
+                onClick={() => navigate("/dashboard")}
                 className="flex items-center gap-2"
               >
                 <ArrowLeft className="w-4 h-4" />

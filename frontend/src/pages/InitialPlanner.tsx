@@ -3,14 +3,18 @@ import { useNavigate } from "react-router-dom";
 import ChatMessage from "@/components/planner/ChatMessage";
 import ChatInput from "@/components/planner/ChatInput";
 import LiveSummary from "@/components/planner/LiveSummary";
-import ChatHistory from "@/components/planner/ChatHistory";
 import { Button } from "@/components/ui/button";
 import { 
   Rocket, 
   Menu, 
   Plane, 
   Sparkles,
-  ArrowRight
+  ArrowRight,
+  ArrowLeft,
+  Home,
+  Settings,
+  HelpCircle,
+  X
 } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { Helmet } from "react-helmet";
@@ -285,16 +289,88 @@ const InitialPlanner = () => {
           />
         )}
 
-        {/* Left Sidebar - Chat History */}
+        {/* Left Sidebar - Navigation */}
         <aside
           className={`fixed lg:static inset-y-0 left-0 z-50 w-72 transform transition-transform duration-300 ease-in-out ${
             isSidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
           }`}
         >
-          <ChatHistory
-            onNewChat={handleNewChat}
-            onClose={() => setIsSidebarOpen(false)}
-          />
+          <div className="h-full flex flex-col bg-background border-r border-border/50">
+            {/* Header */}
+            <div className="p-4 border-b border-border/50">
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
+                    <Plane className="w-4 h-4 text-white transform -rotate-45" />
+                  </div>
+                  <span className="font-bold text-foreground">TravelAI</span>
+                </div>
+                <button 
+                  onClick={() => setIsSidebarOpen(false)}
+                  className="lg:hidden w-8 h-8 rounded-lg hover:bg-muted/50 flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+              
+              {/* Back to Dashboard Button */}
+              <Button
+                onClick={() => navigate("/dashboard")}
+                variant="outline"
+                className="w-full h-11 rounded-xl border-border/50 hover:bg-muted/50"
+              >
+                <ArrowLeft className="w-4 h-4 mr-2" />
+                Back to Dashboard
+              </Button>
+            </div>
+
+            {/* Navigation Links */}
+            <div className="flex-1 p-4">
+              <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider px-2 mb-3">
+                Navigation
+              </p>
+              <div className="space-y-1">
+                <button
+                  onClick={() => navigate("/dashboard")}
+                  className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left hover:bg-muted/50 transition-colors"
+                >
+                  <div className="w-9 h-9 rounded-lg bg-muted flex items-center justify-center">
+                    <Home className="w-4 h-4 text-muted-foreground" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-foreground">Dashboard</p>
+                    <p className="text-xs text-muted-foreground">View all trips</p>
+                  </div>
+                </button>
+                
+                <button
+                  className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left bg-emerald-500/10 border border-emerald-500/20"
+                >
+                  <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
+                    <Sparkles className="w-4 h-4 text-white" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-foreground">New Trip</p>
+                    <p className="text-xs text-muted-foreground">Plan with AI</p>
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            {/* Bottom Links */}
+            <div className="p-4 border-t border-border/50">
+              <div className="space-y-1">
+                <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-left hover:bg-muted/50 transition-colors">
+                  <HelpCircle className="w-4 h-4 text-muted-foreground" />
+                  <span className="text-sm text-muted-foreground">Help & Support</span>
+                </button>
+                <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-left hover:bg-muted/50 transition-colors">
+                  <Settings className="w-4 h-4 text-muted-foreground" />
+                  <span className="text-sm text-muted-foreground">Settings</span>
+                </button>
+              </div>
+            </div>
+          </div>
         </aside>
 
         {/* Main Content */}
