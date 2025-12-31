@@ -7,22 +7,18 @@ import {
   Plane,
   Sparkles,
   MapPin,
-  Calendar,
   Users,
   Wallet,
   ArrowRight,
-  Menu,
-  X,
   MessageSquare,
   Route,
-  Clock,
   Star,
   ChevronRight,
   Play,
-  Globe2,
   Zap,
-  Shield,
   Heart,
+  Clock,
+  Globe2,
 } from "lucide-react";
 
 const Landing = () => {
@@ -145,95 +141,144 @@ const Landing = () => {
       </Helmet>
 
       <div className="min-h-screen bg-background overflow-x-hidden">
-        {/* Navigation */}
-        <nav className={`fixed top-0 w-full z-50 transition-all duration-500 ${
+        {/* Navigation - Modern Liquid Glass Design */}
+        <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled 
-            ? "bg-background/80 backdrop-blur-xl border-b border-border/50 shadow-sm" 
-            : "bg-transparent"
+            ? "py-2" 
+            : "py-4"
         }`}>
-          <div className="container mx-auto px-6">
-            <div className="flex items-center justify-between h-16 md:h-20">
+          <div className="container mx-auto px-4 sm:px-6">
+            <div className={`relative flex items-center justify-between h-14 md:h-16 px-4 md:px-6 rounded-2xl transition-all duration-500 ${
+              scrolled 
+                ? "bg-background/60 backdrop-blur-2xl border border-border/50 shadow-lg shadow-black/5 dark:shadow-black/20" 
+                : "bg-background/30 backdrop-blur-xl border border-white/10 dark:border-white/5"
+            }`}>
+              {/* Liquid gradient background effect */}
+              <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none">
+                <div className={`absolute -top-1/2 -left-1/4 w-1/2 h-full bg-gradient-to-br from-emerald-500/10 to-transparent rounded-full blur-2xl transition-opacity duration-500 ${scrolled ? 'opacity-100' : 'opacity-50'}`} />
+                <div className={`absolute -bottom-1/2 -right-1/4 w-1/2 h-full bg-gradient-to-tl from-teal-500/10 to-transparent rounded-full blur-2xl transition-opacity duration-500 ${scrolled ? 'opacity-100' : 'opacity-50'}`} />
+              </div>
+
               {/* Logo */}
-              <div className="flex items-center gap-3 group cursor-pointer" onClick={() => navigate("/")}>
+              <div className="relative flex items-center gap-2.5 group cursor-pointer z-10" onClick={() => navigate("/")}>
                 <div className="relative">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg group-hover:shadow-emerald-500/25 transition-all duration-300">
-                    <Plane className="w-5 h-5 text-white transform -rotate-45" />
+                  <div className="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-gradient-to-br from-emerald-500 via-emerald-400 to-teal-500 flex items-center justify-center shadow-lg shadow-emerald-500/30 group-hover:shadow-emerald-500/50 transition-all duration-300 group-hover:scale-105">
+                    <Plane className="w-4 h-4 md:w-5 md:h-5 text-white transform -rotate-45" />
                   </div>
-                  <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-xl blur opacity-0 group-hover:opacity-30 transition-opacity duration-300" />
+                  {/* Glow effect on hover */}
+                  <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-400 blur-lg opacity-0 group-hover:opacity-40 transition-opacity duration-300" />
                 </div>
-                <span className="text-xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+                <span className="text-lg md:text-xl font-bold bg-gradient-to-r from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent">
                   TravelAI
                 </span>
               </div>
 
-              {/* Desktop Nav */}
-              <div className="hidden md:flex items-center gap-1">
-                {["Features", "How It Works", "Reviews"].map((item) => (
-                  <a
-                    key={item}
-                    href={`#${item.toLowerCase().replace(/\s+/g, "-")}`}
-                    className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors rounded-lg hover:bg-muted/50"
-                  >
-                    {item}
-                  </a>
-                ))}
+              {/* Desktop Nav - Center Pills */}
+              <div className="hidden md:flex items-center absolute left-1/2 -translate-x-1/2">
+                <div className="flex items-center gap-1 p-1 rounded-full bg-muted/40 backdrop-blur-sm border border-border/30">
+                  {[
+                    { name: "Features", href: "#features" },
+                    { name: "How It Works", href: "#how-it-works" },
+                    { name: "Reviews", href: "#reviews" },
+                  ].map((item) => (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-all duration-200 rounded-full hover:bg-background/80 hover:shadow-sm"
+                    >
+                      {item.name}
+                    </a>
+                  ))}
+                </div>
               </div>
 
               {/* Desktop Actions */}
-              <div className="hidden md:flex items-center gap-3">
+              <div className="hidden md:flex items-center gap-2 relative z-10">
                 <ThemeToggle />
-                <Button variant="ghost" size="sm" onClick={() => navigate("/auth")} className="text-muted-foreground hover:text-foreground">
+                <div className="w-px h-6 bg-border/50 mx-1" />
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  onClick={() => navigate("/auth")} 
+                  className="text-muted-foreground hover:text-foreground hover:bg-background/60 rounded-full px-4"
+                >
                   Sign In
                 </Button>
                 <Button 
                   size="sm" 
                   onClick={() => navigate("/auth")} 
-                  className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 transition-all duration-300"
+                  className="relative overflow-hidden bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-white shadow-lg shadow-emerald-500/30 hover:shadow-emerald-500/50 transition-all duration-300 rounded-full px-5 group"
                 >
-                  Get Started
-                  <ArrowRight className="w-4 h-4 ml-1" />
+                  <span className="relative z-10 flex items-center">
+                    Get Started
+                    <ArrowRight className="w-4 h-4 ml-1.5 group-hover:translate-x-0.5 transition-transform" />
+                  </span>
+                  {/* Button shine effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
                 </Button>
               </div>
 
               {/* Mobile Menu Button */}
               <button
-                className="md:hidden p-2 rounded-lg hover:bg-muted/50 transition-colors"
+                className="md:hidden relative z-10 p-2 rounded-full hover:bg-background/60 transition-colors"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               >
-                {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                <div className="relative w-5 h-5">
+                  <span className={`absolute left-0 w-5 h-0.5 bg-foreground rounded-full transition-all duration-300 ${mobileMenuOpen ? 'top-2.5 rotate-45' : 'top-1'}`} />
+                  <span className={`absolute left-0 top-2.5 w-5 h-0.5 bg-foreground rounded-full transition-all duration-300 ${mobileMenuOpen ? 'opacity-0 scale-0' : 'opacity-100 scale-100'}`} />
+                  <span className={`absolute left-0 w-5 h-0.5 bg-foreground rounded-full transition-all duration-300 ${mobileMenuOpen ? 'top-2.5 -rotate-45' : 'top-4'}`} />
+                </div>
               </button>
             </div>
 
-            {/* Mobile Menu */}
-            {mobileMenuOpen && (
-              <div className="md:hidden py-4 border-t border-border/50 animate-in slide-in-from-top-2 duration-200">
-                <div className="flex flex-col gap-2">
-                  {["Features", "How It Works", "Reviews"].map((item) => (
+            {/* Mobile Menu - Glassmorphism Dropdown */}
+            <div className={`md:hidden overflow-hidden transition-all duration-300 ease-out ${
+              mobileMenuOpen ? 'max-h-96 opacity-100 mt-2' : 'max-h-0 opacity-0 mt-0'
+            }`}>
+              <div className="bg-background/70 backdrop-blur-2xl border border-border/50 rounded-2xl p-4 shadow-xl">
+                {/* Nav Links */}
+                <div className="flex flex-col gap-1">
+                  {[
+                    { name: "Features", href: "#features" },
+                    { name: "How It Works", href: "#how-it-works" },
+                    { name: "Reviews", href: "#reviews" },
+                  ].map((item) => (
                     <a
-                      key={item}
-                      href={`#${item.toLowerCase().replace(/\s+/g, "-")}`}
-                      className="px-4 py-3 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-lg transition-colors"
+                      key={item.name}
+                      href={item.href}
+                      className="px-4 py-3 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-xl transition-all duration-200"
                       onClick={() => setMobileMenuOpen(false)}
                     >
-                      {item}
+                      {item.name}
                     </a>
                   ))}
                 </div>
-                <div className="flex items-center gap-3 mt-4 pt-4 border-t border-border/50">
+                
+                {/* Divider */}
+                <div className="h-px bg-border/50 my-3" />
+                
+                {/* Actions */}
+                <div className="flex items-center gap-3">
                   <ThemeToggle />
-                  <Button variant="outline" size="sm" onClick={() => navigate("/auth")} className="flex-1">
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    onClick={() => navigate("/auth")} 
+                    className="flex-1 rounded-xl h-10"
+                  >
                     Sign In
                   </Button>
                   <Button 
                     size="sm" 
                     onClick={() => navigate("/auth")} 
-                    className="flex-1 bg-gradient-to-r from-emerald-500 to-teal-600 text-white"
+                    className="flex-1 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-xl h-10 shadow-lg shadow-emerald-500/25"
                   >
                     Get Started
+                    <ArrowRight className="w-4 h-4 ml-1" />
                   </Button>
                 </div>
               </div>
-            )}
+            </div>
           </div>
         </nav>
 
@@ -286,7 +331,7 @@ const Landing = () => {
               </p>
 
               {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12 animate-slide-up" style={{ animationDelay: "0.3s" }}>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12 animate-slide-up mx-auto" style={{ animationDelay: "0.3s" }}>
                 <Button 
                   size="lg" 
                   onClick={() => navigate("/auth")}
@@ -449,9 +494,11 @@ const Landing = () => {
 
             {/* Testimonial Carousel */}
             <div className="max-w-4xl mx-auto">
-              <div className="relative bg-gradient-to-b from-background to-muted/30 border border-border/50 rounded-3xl p-8 md:p-12">
+              <div className="relative bg-gradient-to-b from-background to-muted/30 border-2 border-border rounded-3xl p-8 md:p-12 shadow-xl shadow-black/5 dark:shadow-black/20 min-h-[320px] flex flex-col justify-center">
                 {/* Quote Icon */}
-                <div className="absolute top-6 left-8 text-6xl text-muted-foreground/10 font-serif">"</div>
+                <div className="absolute top-6 left-8">
+                  <MessageSquare className="w-10 h-10 text-pink-500 fill-pink-500/20" />
+                </div>
 
                 {/* Active Testimonial */}
                 <div className="relative z-10 text-center">
@@ -461,7 +508,7 @@ const Landing = () => {
                     ))}
                   </div>
                   
-                  <p className="text-xl md:text-2xl text-foreground mb-8 leading-relaxed">
+                  <p className="text-xl md:text-2xl text-foreground mb-8 leading-relaxed min-h-[96px] flex items-center justify-center">
                     "{testimonials[activeTestimonial].content}"
                   </p>
 

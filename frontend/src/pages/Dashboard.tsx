@@ -339,7 +339,7 @@ const Dashboard = () => {
               </div>
 
               {/* Right side - Theme Toggle & User */}
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 -mr-2">
                 <ThemeToggle />
                 <UserDropdown />
               </div>
